@@ -4,6 +4,7 @@
   "description": "Minecraft gui block/item renderer",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "test": "nole ./src/**/*.test.ts"
@@ -30,7 +31,7 @@
   "dependencies": {
     "assign-deep": "^1.0.1",
     "canvas": "^2.11.2",
-    "commander": "^8.3.0",
+    "commander": "^12.0.0",
     "crc": "^4.3.2",
     "node-canvas-webgl": "^0.3.0",
     "node-stream-zip": "^1.15.0",

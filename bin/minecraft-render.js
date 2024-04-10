@@ -1,14 +1,16 @@
 #!/usr/bin/env node
 
-const program = require('commander');
-const path = require('path');
-const fs = require('fs');
-const package = require('../package.json');
-const mkdirp = require('mkdirp');
-const { Minecraft, Logger } = require('../dist');
+import { Command } from 'commander';
+import { promises } from 'fs';
+import { mkdirp } from 'mkdirp';
+import { join, resolve } from 'path';
+import { exit } from 'process';
+import { Logger, Minecraft } from '../dist/index.js';
+import pkg from '../package.json' assert { type: 'json' };
 
-program
-  .usage('<jar> [output]')
+const program = new Command();
+
+program.usage('<jar> [output]')
   .option('-w, --width [width]', 'output image width', 1000)
   .option('-t, --height [height]', 'output image height', 1000)
   .option('-d, --distance [distance]', 'distance between camera and block', 20)
@@ -16,23 +18,25 @@ program
   .option('-p, --plane', 'debugging plane and axis', 0)
   .option('-A, --no-animation', 'disables apng generation')
   .option('-f, --filter <regex>', 'regex pattern to filter blocks by name')
-  .version(package.version)
+  .version(pkg.version)
   .parse(process.argv);
+
 
 const options = program.opts();
 
 if (!program.args.length) {
-  return program.help();
+  program.help();
+  exit(0);
 }
 
 async function Main() {
   Logger.level = options.verbose;
 
-  const minecraft = Minecraft.open(path.resolve(program.args[0]));
+  const minecraft = Minecraft.open(resolve(program.args[0]));
   const blocks = filterByRegex(options.filter, await minecraft.getBlockList());
 
   let i = 0;
-  const folder = path.resolve(program.args[1] || 'output');
+  const folder = resolve(program.args[1] || 'output');
 
   await mkdirp(folder);
 
@@ -55,8 +59,8 @@ async function Main() {
       continue;
     }
 
-    const filePath = path.join(folder, block.blockName + '.png');
-    await fs.promises.writeFile(filePath, block.buffer);
+    const filePath = join(folder, block.blockName + '.png');
+    await promises.writeFile(filePath, block.buffer);
 
     console.log(`[${j} / ${totalBlocks}] ${block.blockName} rendered to ${filePath}`);
   }

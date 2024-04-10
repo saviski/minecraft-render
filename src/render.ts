@@ -1,7 +1,7 @@
 import * as rawCanvas from "canvas";
 import * as THREE from "three";
-import type { Minecraft } from "./minecraft";
-import { Logger } from "./utils/logger";
+import type { Minecraft } from "./minecraft.js";
+import { Logger } from "./utils/logger.js";
 import type {
   BlockModel,
   BlockSides,
@@ -9,11 +9,11 @@ import type {
   Face,
   Renderer,
   RendererOptions,
-} from "./utils/types";
-import { distance, invert, mul, size } from "./utils/vector-math";
+} from "./utils/types.js";
+import { distance, invert, mul, size } from "./utils/vector-math.js";
 //@ts-ignore
 import { createCanvas, loadImage } from "node-canvas-webgl";
-import { makeAnimatedPNG } from "./utils/apng";
+import { makeAnimatedPNG } from "./utils/apng.js";
 
 const MATERIAL_FACE_ORDER = [
   "east",
