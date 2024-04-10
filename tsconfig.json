@@ -4,7 +4,8 @@
     "module": "commonjs",
     "lib": [
       "es2017",
-      "esnext"
+      "esnext",
+      "DOM"
     ],
     "declaration": true,
     "declarationMap": true,
