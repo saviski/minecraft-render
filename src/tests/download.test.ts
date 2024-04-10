@@ -39,8 +39,8 @@ export class DownloadTest {
   async checkExistingJar() {
     if (this.jarPath) skipTest("Jar already exists");
     const checkPath = this.getPath();
-    const stat = await fs.stat(checkPath);
-    if (stat.size > 0) {
+    const stat = await fs.stat(checkPath).catch(() => undefined);
+    if (stat) {
       this.jarPath = checkPath;
       skipTest("Jar already exists");
     }

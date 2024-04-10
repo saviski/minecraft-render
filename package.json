@@ -34,14 +34,14 @@
     "crc": "^4.3.2",
     "node-canvas-webgl": "^0.3.0",
     "node-stream-zip": "^1.15.0",
-    "three": "^0.163.0"
+    "three": "^0.130.1"
   },
   "devDependencies": {
     "@types/crc": "^3.8.3",
     "@types/node": "^20.12.7",
     "@types/three": "^0.163.0",
     "mkdirp": "^3.0.1",
-    "nole": "^2.2.1",
+    "nole": "^1.0.12",
     "typescript": "^5.4.4"
   }
 }
